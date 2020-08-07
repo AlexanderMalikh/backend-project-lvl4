@@ -1,6 +1,6 @@
 import Express from 'express';
 import Rollbar from 'rollbar';
-
+const PORT = process.env.PORT || 5000;
 const app = new Express();
 
 const rollbar = new Rollbar({
@@ -17,6 +17,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('Example app listening on port 3000!');
 });
