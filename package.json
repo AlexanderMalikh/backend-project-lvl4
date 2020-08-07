@@ -1,0 +1,24 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderMalikh/backend-project-lvl4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexanderMalikh/backend-project-lvl4/issues"
+  },
+  "homepage": "https://github.com/AlexanderMalikh/backend-project-lvl4#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "rollbar": "^2.19.1"
+  }
+}
