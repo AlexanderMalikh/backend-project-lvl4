@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build-configs": "babel webpack.config.js --out-dir dist",
+    "build-server": "babel server --out-dir dist/server --source-maps inline && run build-configs && cp -r server/views dist/server/views",
+    "build-frontend": "webpack -p && cp -r webpack.config.js dist",
+    "build": "rm -rf dist && npm run build-frontend && npm run build-server",
+    "start": "node dist/server/index.js"
   },
-  "type": "module",
   "engines": {
     "node": "14.x"
   },
@@ -21,9 +25,13 @@
   },
   "homepage": "https://github.com/AlexanderMalikh/backend-project-lvl4#readme",
   "dependencies": {
+    "autoprefixer": "^9.8.6",
     "bootstrap": "^4.5.2",
     "dotenv": "^8.2.0",
     "fastify": "^3.2.0",
+    "fastify-static": "^3.2.0",
+    "point-of-view": "^4.3.0",
+    "pug": "^3.0.0",
     "rollbar": "^2.19.1",
     "webpack": "^4.44.1"
   },
@@ -32,10 +40,16 @@
     "@babel/core": "^7.11.1",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.1",
     "eslint": "^7.6.0",
-    "jest": "^26.2.2",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^23.20.0"
+    "eslint-plugin-jest": "^23.20.0",
+    "jest": "^26.2.2",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^1.2.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }

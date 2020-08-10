@@ -1,18 +1,21 @@
-#Makefile
+setup:
+	npm install
+	npx knex migrate:latest
 
-install:
-	npm link
+build:
+	npm run build
 
-publish:
-	npm publish --dry-run
+start:
+	heroku local -f Procfile
+
+start-backend:
+	npx nodemon --exec npx babel-node server/index.js
+
+start-frontend:
+	npx webpack-dev-server
 
 lint:
 	npx eslint .
 
 test:
-	npm test
-	
-test-coverage:
-	npm test -- --coverage --coverageProvider=v8
-
-.PHONY: test
+	npm run test

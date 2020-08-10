@@ -1,0 +1,19 @@
+html(lang=en).h-100
+  head
+    title Task Manager
+    script(src=assetPath('main.js'))
+    link(href=assetPath('main.css'))
+  body.h-100.d-flex.flex-column
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
+        a.navbar-brand(href='/') Task Manager
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target="#navbarSupportedContent") 
+            span.navbar-toggler-icon
+        div.collapse.navbar-collapse#navbarSupportedContent
+            ul.navbar-nav.mr-auto
+                li.nav-item.active
+                    a.nav-link(href='/users') Пользователи
+                        span.sr-only (current)
+    block content
+    block foot
+      #footer
+        p some footer content
