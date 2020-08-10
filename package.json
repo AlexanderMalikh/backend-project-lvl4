@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
-  "engines" : {
-    "node":"14.x"
+  "engines": {
+    "node": "14.x"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,21 @@
   },
   "homepage": "https://github.com/AlexanderMalikh/backend-project-lvl4#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "rollbar": "^2.19.1"
+    "bootstrap": "^4.5.2",
+    "dotenv": "^8.2.0",
+    "fastify": "^3.2.0",
+    "rollbar": "^2.19.1",
+    "webpack": "^4.44.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "eslint": "^7.6.0",
+    "jest": "^26.2.2",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0"
   }
 }
