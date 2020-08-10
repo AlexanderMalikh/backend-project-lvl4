@@ -2,7 +2,6 @@ import fastify from 'fastify';
 import Rollbar from 'rollbar';
 import dotenv from 'dotenv';
 dotenv.config();
-const PORT = process.env.PORT || 5000;
 const app = new fastify({
   logger: true
 });
@@ -21,6 +20,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(PORT, () => {
+app.listen(4000, () => {
   console.log('Example app listening on port 5000!');
 });
