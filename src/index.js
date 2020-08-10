@@ -8,7 +8,7 @@ dotenv.config();
 const app = new Fastify({
   logger: true,
 });
-
+/*
 const rollbar = new Rollbar({
   accessToken: process.env.POST_SERVER_ITEM_ACCESS_TOKEN,
   captureUncaught: true,
@@ -18,7 +18,7 @@ const rollbar = new Rollbar({
 //  app.use(rollbar.errorHandler());
 
 rollbar.log('Hello world!');
-
+*/
 app.register(routes);
 
 app.listen(process.env.PORT || 3000, (err, address) => {
