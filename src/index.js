@@ -21,7 +21,7 @@ rollbar.log('Hello world!');
 */
 app.register(routes);
 
-app.listen(process.env.PORT || 3000, (err, address) => {
+app.listen(process.env.PORT || 3000, '0.0.0.0', (err, address) => {
   if (err) {
     app.log.error(err);
     process.exit(1);
