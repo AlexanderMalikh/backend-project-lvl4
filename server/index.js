@@ -6,7 +6,6 @@ import Pug from 'pug';
 import fastifyStatic from 'fastify-static';
 import pointOfView from 'point-of-view';
 import routes from './routes/index.js';
-import webpackConfig from '../webpack.config.js';
 
 dotenv.config();
 
@@ -27,24 +26,21 @@ rollbar.log('Hello world!');
 app.register(routes);
 
 const setUpViews = (app) => {
-  const { devServer } = webpackConfig;
-  const domain = `http://${devServer.host}:${devServer.port}`;
   app.register(pointOfView, {
     engine: {
       pug: Pug,
     },
+    includeViewExtension: true,
     defaultContext: {
-      assetPath: (filename) => `${domain}/assets/${filename}`,
+      assetPath: (filename) => `/assets/${filename}`,
     },
   });
 };
 
 setUpViews(app);
 
-const assetsPath = path.join(__dirname, '..', 'dist', 'public');
-
 app.register(fastifyStatic, {
-  root: assetsPath,
+  root: path.join(__dirname, '..', 'public'),
   prefix: '/assets/',
 });
 
