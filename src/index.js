@@ -1,13 +1,14 @@
 import fastify from 'fastify';
 import Rollbar from 'rollbar';
-require('dotenv').config(); 
+import dotenv from 'dotenv';
+dotenv.config();
 const PORT = process.env.PORT || 5000;
 const app = new fastify({
   logger: true
 });
 
 const rollbar = new Rollbar({
-  accessToken: POST_SERVER_ITEM_ACCESS_TOKEN,
+  accessToken: process.env.POST_SERVER_ITEM_ACCESS_TOKEN,
   captureUncaught: true,
   captureUnhandledRejections: true
 });
