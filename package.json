@@ -33,6 +33,7 @@
     "point-of-view": "^4.3.0",
     "pug": "^3.0.0",
     "rollbar": "^2.19.1",
+    "sqlite3": "^5.0.0",
     "webpack": "^4.44.1"
   },
   "devDependencies": {

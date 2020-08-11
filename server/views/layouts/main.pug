@@ -1,22 +1,19 @@
-html(lang=en).h-100
+html(lang=en).h-25
   head
     title Task Manager
     script(src=assetPath('main.js'))
-    link(href=assetPath('main.css'))
+    link(href=assetPath('main.css') rel="stylesheet")
   body.h-100.d-flex.flex-column
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
-        a.navbar-brand(href='/') Task Manager
-        button.navbar-toggler(type='button' data-toggle='collapse' data-target="#navbarSupportedContent") 
-            span.navbar-toggler-icon
-        div.collapse.navbar-collapse#navbarSupportedContent
-            ul.navbar-nav.mr-auto
-                li.nav-item.active
-                    a.nav-link(href='/users') Пользователи
-                        span.sr-only (current)
-        div.btn.btn-outline-success.my-2.my-sm-0(type="submit") Log In
-        div.btn.btn-outline-success.my-2.my-sm-0(type="submit") Sign Up
-
-    block content
-    block foot
-      #footer
-        p some footer content
+      a.navbar-brand(href='/') Task Manager
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target="#navbarSupportedContent") 
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarSupportedContent
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='/users') Пользователи
+              span.sr-only (current)
+        a.nav-link.active(href='/session') Log In
+        a.nav-link.active(href='/users/new') Sign Up
+    .container
+      block content
