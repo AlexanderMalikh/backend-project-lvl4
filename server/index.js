@@ -5,7 +5,11 @@ import dotenv from 'dotenv';
 import Pug from 'pug';
 import fastifyStatic from 'fastify-static';
 import fastifyFormbody from 'fastify-formbody';
+import fastifyObjection from 'fastify-objectionjs';
 import pointOfView from 'point-of-view';
+import models from './models';
+
+import knexConfig from '../knexfile.js';
 import routes from './routes/index.js';
 
 dotenv.config();
@@ -47,6 +51,10 @@ const registerPlugins = (app) => {
   app.register(fastifyFormbody);
   setUpViews(app);
   setUpAssets(app);
+  app.register(fastifyObjection, {
+    knexConfig: knexConfig.development,
+    models,
+  });
   app.register(routes);
 };
 

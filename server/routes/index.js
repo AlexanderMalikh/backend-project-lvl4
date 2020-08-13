@@ -4,6 +4,6 @@ export default async (fastify) => {
   fastify.get('/session', async (request, reply) => reply.view('server/views/users/register'));
   fastify.get('/users/new', async (request, reply) => reply.view('server/views/users/new'));
   fastify.post('/users/new', async (request, reply) => {
-    return (request.body);
+    return fastify.objection.models.user.query();
   });
 };
