@@ -4,14 +4,11 @@ import path from 'path';
 import dotenv from 'dotenv';
 import Pug from 'pug';
 import fastifyStatic from 'fastify-static';
+import fastifyFormbody from 'fastify-formbody';
 import pointOfView from 'point-of-view';
 import routes from './routes/index.js';
 
 dotenv.config();
-
-const app = new Fastify({
-  logger: true,
-});
 
 const rollbar = new Rollbar({
   accessToken: process.env.POST_SERVER_ITEM_ACCESS_TOKEN,
@@ -22,8 +19,6 @@ const rollbar = new Rollbar({
 //  app.use(rollbar.errorHandler());
 
 rollbar.log('Hello world!');
-
-app.register(routes);
 
 const setUpViews = (app) => {
   app.register(pointOfView, {
@@ -37,12 +32,25 @@ const setUpViews = (app) => {
   });
 };
 
-setUpViews(app);
+const setUpAssets = (app) => {
+  app.register(fastifyStatic, {
+    root: path.join(__dirname, '..', 'public'),
+    prefix: '/assets/',
+  });
+};
 
-app.register(fastifyStatic, {
-  root: path.join(__dirname, '..', 'public'),
-  prefix: '/assets/',
+const app = new Fastify({
+  logger: true,
 });
+
+const registerPlugins = (app) => {
+  app.register(fastifyFormbody);
+  setUpViews(app);
+  setUpAssets(app);
+  app.register(routes);
+};
+
+registerPlugins(app);
 
 app.listen(process.env.PORT || 3000, '0.0.0.0', (err, address) => {
   if (err) {

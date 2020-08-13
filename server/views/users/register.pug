@@ -1,0 +1,12 @@
+extends ../layouts/main.pug
+block content
+	.row.mt-3
+		.col-sm-4.mx-auto
+			form(action="/session/new" method="POST")
+				legend.m-b-1.text-xs-center Авторизация
+					input.form-control(name="email" type="email" placeholder="name@example.com")
+				.form-group.has-float-label
+					input.form-control(name="password" type="password" placeholder="Пароль")
+				.form-group
+					button.btn.btn-success.btn-block(type="submit") Войти
+

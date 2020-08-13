@@ -1,8 +1,9 @@
-html(lang=en).h-25
+doctype html
+html(lang=en)
   head
     title Task Manager
     script(src=assetPath('main.js'))
-    link(href=assetPath('main.css') rel="stylesheet")
+    link(href=assetPath('main.js' ) rel="stylesheet")
   body.h-100.d-flex.flex-column
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-3
       a.navbar-brand(href='/') Task Manager
@@ -13,7 +14,7 @@ html(lang=en).h-25
           li.nav-item.active
             a.nav-link(href='/users') Пользователи
               span.sr-only (current)
-        a.nav-link.active(href='/session' type="submit") Log In
-        a.nav-link.active(href='/users/new' type="submit") Sign Up
+        a.nav-link.active(href='/session') Log In
+        a.nav-link.active(href='/users/new') Sign Up
     .container
       block content
