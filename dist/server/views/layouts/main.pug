@@ -10,11 +10,11 @@ html(lang=en)
       button.navbar-toggler(type='button' data-toggle='collapse' data-target="#navbarSupportedContent") 
         span.navbar-toggler-icon
       .collapse.navbar-collapse#navbarSupportedContent
-        ul.navbar-nav
+        ul.navbar-nav.mr-auto
           li.nav-item.active
             a.nav-link(href='/users') Пользователи
               span.sr-only (current)
-        ul.navbar-nav.mr-auto
+        ul.navbar-nav
           if reply.request.signedIn
             li.nav-item
               form(action='/session' method='post')

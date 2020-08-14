@@ -1,9 +1,17 @@
 extends ../layouts/main.pug
+
 block content
-    table.table.table-stripped
-        thead.thead-light
-            tr
-                th(scope="col") ID
-                th(scope="col") Полное имя
-                th(scope="col") Email
-                th(scope="col") Дата создания
+	table.table.table-stripped
+		thead.thead-light
+			tr
+				th ID
+				th Полное имя
+				th Email
+				th Дата создания
+		tbody
+			each user in users
+				tr
+					td #{user.id}
+					td #{user.firstName} #{user.lastName}
+					td #{user.email}
+					td #{user.createdAt} 

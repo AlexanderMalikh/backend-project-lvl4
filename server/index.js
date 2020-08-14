@@ -1,4 +1,4 @@
-import Fastify, { fastify } from 'fastify';
+import Fastify from 'fastify';
 import Rollbar from 'rollbar';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -38,8 +38,8 @@ const setUpViews = (app) => {
       assetPath: (filename) => `/assets/${filename}`,
     },
   });
-  app.decorateReply('render', function render(viewPath) {
-    this.view(viewPath, { reply: this });
+  app.decorateReply('render', function render(viewPath, locals) {
+    this.view(viewPath, { ...locals, reply: this });
   });
 };
 
