@@ -15,12 +15,10 @@ export default class User extends unique(Model) {
       required: ['email', 'password'],
       properties: {
         id: { type: 'integer' },
-        email: { type: 'string', format: 'email' },
         first_name: { type: 'string', maxLength: 255 },
         second_name: { type: 'string', maxLength: 255 },
+        email: { type: 'string', format: 'email' },
         password_digest: { type: 'string', minLength: 3 },
-        created_at: { type: 'timestamp' },
-        updated_at: { type: 'timestamp' },
       },
     };
   }

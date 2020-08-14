@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { fastify } from 'fastify';
 import Rollbar from 'rollbar';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -6,6 +6,10 @@ import Pug from 'pug';
 import fastifyStatic from 'fastify-static';
 import fastifyFormbody from 'fastify-formbody';
 import fastifyObjection from 'fastify-objectionjs';
+import fastifyFlash from 'fastify-flash';
+import fastifyErrorPage from 'fastify-error-page';
+import fastifySecureSession from 'fastify-secure-session';
+import fastifyMethodOverride from 'fastify-method-override';
 import pointOfView from 'point-of-view';
 import models from './models';
 
@@ -34,6 +38,9 @@ const setUpViews = (app) => {
       assetPath: (filename) => `/assets/${filename}`,
     },
   });
+  app.decorateReply('render', function render(viewPath) {
+    this.view(viewPath, { reply: this });
+  });
 };
 
 const setUpAssets = (app) => {
@@ -43,11 +50,25 @@ const setUpAssets = (app) => {
   });
 };
 
+const addHooks = (app) => {
+  app.decorateRequest('currentUser', null);
+  app.decorateRequest('signedIn', false);
+
+  app.addHook('preHandler', async (req) => {
+    const userId = req.session.get('userId');
+    if (userId) {
+      req.currentUser = await app.objection.models.user.query().findById(userId);
+      req.signedIn = true;
+    }
+  });
+};
+
 const app = new Fastify({
   logger: true,
 });
 
 const registerPlugins = (app) => {
+  app.register(fastifyErrorPage);
   app.register(fastifyFormbody);
   setUpViews(app);
   setUpAssets(app);
@@ -55,7 +76,16 @@ const registerPlugins = (app) => {
     knexConfig: knexConfig.development,
     models,
   });
-  app.register(routes);
+  app.register(fastifySecureSession, {
+    secret: 'qwertyuiopasdfghjklzxcnmmmzxasjhdklasjkdlawqi',
+    cookie: {
+      path: '/',
+    },
+  });
+  app.register(fastifyMethodOverride);
+  app.register(fastifyFlash);
+  routes(app);
+  addHooks(app);
 };
 
 registerPlugins(app);
