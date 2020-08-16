@@ -1,0 +1,9 @@
+extends ../layouts/main.pug
+
+block content
+	form(action="/statuses" method="POST")
+		legend.m-b-1.text-xs-center Создать статус
+		.form-group.input-group
+			input.form-control(name="name" type="text")
+		.form-group
+			button.btn.btn-success.btn-block(type="submit") Создать

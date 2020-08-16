@@ -8,10 +8,14 @@ block content
 				th Полное имя
 				th Email
 				th Дата создания
+				th Действие
 		tbody
 			each user in users
 				tr
 					td #{user.id}
 					td #{user.firstName} #{user.lastName}
 					td #{user.email}
-					td #{user.createdAt} 
+					td #{user.createdAt}
+					td
+						a.nav-link(href=`/users/edit/${user.id}`) Изменить
+						a.nav-link(href=`/users/delete/${user.id}`) Удалить

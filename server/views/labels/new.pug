@@ -1,0 +1,9 @@
+extends ../layouts/main.pug
+
+block content
+	form(action="/labels" method="POST")
+		legend.m-b-1.text-xs-center Создать метку
+		.form-group.input-group
+			input.form-control(name="name" type="text")
+		.form-group
+			button.btn.btn-success.btn-block(type="submit") Создать

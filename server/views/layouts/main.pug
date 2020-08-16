@@ -1,35 +1,41 @@
 doctype html
 html(lang=en)
-  head
-    title Task Manager
-    script(src=assetPath('main.js'))
-    link(href=assetPath('main.js' ) rel="stylesheet")
-  body.h-100.d-flex.flex-column
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-5
-      a.navbar-brand(href='/') Task Manager
-      button.navbar-toggler(type='button' data-toggle='collapse' data-target="#navbarSupportedContent") 
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse#navbarSupportedContent
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/users') Пользователи
-              span.sr-only (current)
-        ul.navbar-nav
-          if reply.request.signedIn
-            li.nav-item
-              form(action='/session' method='post')
-                input(type="hidden" name="_method" value="DELETE")
-                button.btn.btn-danger.btn-block(type="submit") Выйти
-          else
-            li.nav-item
-              a.nav-link.active(href='/session/new') Войти
-            li.nav-item
-              a.nav-link.active(href='/users/new') Зарегистрироваться
-    .container.h-100
+	head
+		title Task Manager
+		script(src=assetPath('main.js'))
+		link(href=assetPath('main.js' ) rel="stylesheet")
+	body.h-100.d-flex.flex-column
+		nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-5
+			a.navbar-brand(href='/') Task Manager
+			button.navbar-toggler(type='button' data-toggle='collapse' data-target="#navbarSupportedContent") 
+				span.navbar-toggler-icon
+			.collapse.navbar-collapse#navbarSupportedContent
+				ul.navbar-nav.mr-auto
+					li.nav-item.active
+						a.nav-link(href='/users') Пользователи
+					if reply.request.signedIn
+						li.nav-item
+							a.nav-link(href='/statuses') Статусы
+						li.nav-item
+							a.nav-link(href='/labels') Метки
+						li.nav-item
+							a.nav-link(href='/tasks') Задачи
+				ul.navbar-nav
+					if reply.request.signedIn
+						li.nav-item
+							form(action='/session' method='post')
+								input(type="hidden" name="_method" value="DELETE")
+								button.btn.btn-danger.btn-block(type="submit") Выйти
+					else	
+						li.nav-item
+								a.nav-link.active(href='/session/new') Войти
+						li.nav-item
+								a.nav-link.active(href='/users/new') Зарегистрироваться
+		.container.h-100
 
-      each messages, type in reply.flash() || []
-        each message in messages
-          div.alert(class=`alert-${type}`)=message
+			each messages, type in reply.flash() || []
+				each message in messages
+					div.alert(class=`alert-${type}`)=message
 
-      block content
+			block content
 

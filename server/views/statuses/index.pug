@@ -1,0 +1,21 @@
+extends ../layouts/main.pug
+
+block content
+	a.nav-link(href=`/statuses/new`) Создать статус
+	hr
+	table.table.table-stripped
+		thead.thead-light
+			tr
+				th ID
+				th Наименование
+				th Дата создания
+				th Действие
+		tbody
+			each status in statuses
+				tr
+					td #{status.id}
+					td #{status.name}
+					td #{status.createdAt}
+					td
+						a.nav-link(href=`/statuses/edit/${status.id}`) Изменить
+						a.nav-link(href=`/statuses/delete/${status.id}`) Удалить

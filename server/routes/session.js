@@ -1,4 +1,4 @@
-import encrypt from '../lib/secure.js';
+import { encrypt } from '../lib/secure.js';
 
 export default async (app) => {
   app.get('/session/new', async (request, reply) => reply.render('server/views/users/register'));
@@ -10,13 +10,11 @@ export default async (app) => {
     if (!user || encrypt(password) !== user[0].passwordDigest) {
       request.flash('danger', 'Неправильно указан email или пароль');
       reply.redirect('/session/new');
-      return reply;
     }
 
     request.session.set('userId', user[0].id);
     request.flash('info', 'Авторизация прошла успешно');
     reply.redirect('/');
-    return reply;
   });
 
   app.delete('/session', async (request, reply) => {

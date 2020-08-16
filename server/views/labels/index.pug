@@ -1,0 +1,21 @@
+extends ../layouts/main.pug
+
+block content
+	a.nav-link(href='/labels/new') Создать метку
+	hr
+	table.table.table-stripped
+		thead.thead-light
+			tr
+				th ID
+				th Наименование
+				th Дата создания
+				th Действие
+		tbody
+			each label in labels
+				tr
+					td #{label.id}
+					td #{label.name}
+					td #{label.createdAt}
+					td
+						a.nav-link(href=`/labels/edit/${label.id}`) Изменить
+						a.nav-link(href=`/labels/delete/${label.id}`) Удалить

@@ -25,6 +25,7 @@ const rollbar = new Rollbar({
 });
 
 //  app.use(rollbar.errorHandler());
+const privateRoutes = ['/labels', '/tasks', '/statuses', '/labels/new', '/statuses/new'];
 
 rollbar.log('Hello world!');
 
@@ -54,11 +55,15 @@ const addHooks = (app) => {
   app.decorateRequest('currentUser', null);
   app.decorateRequest('signedIn', false);
 
-  app.addHook('preHandler', async (req) => {
+  app.addHook('preHandler', async (req, reply) => {
     const userId = req.session.get('userId');
     if (userId) {
       req.currentUser = await app.objection.models.user.query().findById(userId);
       req.signedIn = true;
+    }
+    if (privateRoutes.find((r) => r === req.url) && !userId) {
+      req.flash('danger', 'Нет доступа! Авторизуйтесь');
+      reply.redirect('/');
     }
   });
 };
