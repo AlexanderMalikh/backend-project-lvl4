@@ -5,5 +5,8 @@ block content
 		legend.m-b-1.text-xs-center Создать статус
 		.form-group.input-group
 			input.form-control(name="name" type="text")
+		if errors
+			each err in errors
+				p #{err.message}
 		.form-group
 			button.btn.btn-success.btn-block(type="submit") Создать

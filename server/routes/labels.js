@@ -7,8 +7,21 @@ export default async (app) => {
     reply.render('server/views/labels/new');
   });
   app.post('/labels', async (request, reply) => {
-    const label = await app.objection.models.label.fromJson(request.body);
-    await app.objection.models.label.query().insert(label);
+    try {
+      const label = await app.objection.models.label.fromJson(request.body);
+      await app.objection.models.label.query().insert(label);
+    } catch (err) {
+      const errors = err.data.name;
+      request.flash('danger', 'Не удалось создать метку');
+      reply.render('server/views/labels/new', { errors });
+      return reply;
+    }
+    reply.redirect('/labels');
+    return reply;
+  });
+  app.delete('/labels/:id/labels', async (request, reply) => {
+    const { id } = request.params;
+    await app.objection.models.label.query().delete().where('id', '=', id);
     reply.redirect('/labels');
   });
 };

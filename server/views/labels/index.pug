@@ -17,5 +17,7 @@ block content
 					td #{label.name}
 					td #{label.createdAt}
 					td
-						a.nav-link(href=`/labels/edit/${label.id}`) Изменить
-						a.nav-link(href=`/labels/delete/${label.id}`) Удалить
+						a.nav-link(href=`/labels/${label.id}/edit`) Изменить
+						form(action=`/labels/${label.id}/delete` method='post')
+							input(type="hidden" name="_method" value="DELETE")
+							button.btn.btn-link(type="submit") Удалить

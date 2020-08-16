@@ -17,5 +17,7 @@ block content
 					td #{user.email}
 					td #{user.createdAt}
 					td
-						a.nav-link(href=`/users/edit/${user.id}`) Изменить
-						a.nav-link(href=`/users/delete/${user.id}`) Удалить
+						a.nav-link(href=`/users/${user.id}/edit`) Изменить
+						form(action=`/users/${user.id}/delete` method='post')
+							input(type="hidden" name="_method" value="DELETE")
+							button.btn.btn-link(type="submit") Удалить

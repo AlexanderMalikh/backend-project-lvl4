@@ -17,5 +17,7 @@ block content
 					td #{status.name}
 					td #{status.createdAt}
 					td
-						a.nav-link(href=`/statuses/edit/${status.id}`) Изменить
-						a.nav-link(href=`/statuses/delete/${status.id}`) Удалить
+						a.nav-link(href=`/statuses/${status.id}/edit`) Изменить
+						form(action=`/statuses/${status.id}/delete` method='post')
+							input(type="hidden" name="_method" value="DELETE")
+							button.btn.btn-link(type="submit") Удалить

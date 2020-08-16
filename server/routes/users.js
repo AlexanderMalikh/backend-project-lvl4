@@ -12,4 +12,9 @@ export default async (app) => {
     reply.render('/server/views/welcome/welcome');
     return reply;
   });
+  app.delete('/users/:id/delete', async (request, reply) => {
+    const { id } = request.params;
+    await app.objection.models.user.query().delete().where('id', '=', id);
+    reply.redirect('/users');
+  });
 };
