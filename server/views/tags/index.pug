@@ -1,7 +1,7 @@
 extends ../layouts/main.pug
 
 block content
-	a.nav-link(href='/labels/new') Создать метку
+	a.nav-link(href='/tags/new') Создать метку
 	hr
 	table.table.table-stripped
 		thead.thead-light
@@ -11,13 +11,13 @@ block content
 				th Дата создания
 				th Действие
 		tbody
-			each label in labels
+			each tag in tags
 				tr
-					td #{label.id}
-					td #{label.name}
-					td #{label.createdAt}
+					td #{tag.id}
+					td #{tag.name}
+					td #{tag.createdAt}
 					td
-						a.nav-link(href=`/labels/${label.id}/edit`) Изменить
-						form(action=`/labels/${label.id}/delete` method='post')
+						a.nav-link(href=`/tags/${tag.id}/edit`) Изменить
+						form(action=`/tags/${tag.id}` method='post')
 							input(type="hidden" name="_method" value="DELETE")
 							button.btn.btn-link(type="submit") Удалить

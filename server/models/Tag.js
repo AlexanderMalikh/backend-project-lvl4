@@ -3,9 +3,9 @@ import objectionUnique from 'objection-unique';
 
 const unique = objectionUnique({ fields: ['name'] });
 
-export default class Label extends unique(Model) {
+export default class Tag extends unique(Model) {
   static get tableName() {
-    return 'labels';
+    return 'tags';
   }
 
   static get jsonSchema() {

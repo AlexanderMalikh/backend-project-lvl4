@@ -1,9 +1,11 @@
 import User from './User.js';
-import Label from './Label.js';
+import Tag from './Tag.js';
 import Status from './Status.js';
+import Task from './Task.js';
 
 export default [
   User,
-  Label,
+  Tag,
   Status,
+  Task,
 ];

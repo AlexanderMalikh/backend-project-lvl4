@@ -1,17 +1,9 @@
 extends ../layouts/main.pug
 
 block content
-	.row.mt-3
-		.col-sm-4.mx-auto
-			form(action="/users/new" method="POST")
-				legend.m-b-1.text-xs-center Регистрация
-				.form-group.input-group
-					input.form-control(name="firstName" type="text" placeholder="Имя")
-				.form-group.input-group
-					input.form-control(name="lastName" type="text" placeholder="Фамилия")
-				.form-group.input-group
-					input.form-control(name="email" type="text" placeholder="name@example.com" required)
-				.form-group.has-float-label
-					input.form-control(name="password" type="password" placeholder="Пароль")
-				.form-group
-					button.btn.btn-success.btn-block(type="submit") Зарегистрироваться
+  +formFor(action=`/users` method="post")
+    +input(user, 'firstName', errors)(type="text")
+    +input(user, 'lastName', errors)(type="text")
+    +input(user, 'email', errors)(type="text")
+    +input(user, 'password', errors)(type="password")
+    +submit()

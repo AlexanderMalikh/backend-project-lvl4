@@ -15,6 +15,7 @@ import models from './models';
 
 import knexConfig from '../knexfile.js';
 import routes from './routes/index.js';
+import getHelpers from './helpers/index.js';
 
 dotenv.config();
 
@@ -25,19 +26,22 @@ const rollbar = new Rollbar({
 });
 
 //  app.use(rollbar.errorHandler());
-const privateRoutes = ['/labels', '/tasks', '/statuses', '/labels/new', '/statuses/new'];
+const privateRoutes = ['/tags', '/tasks', '/tags', '/labels/new', '/statuses/new'];
 
 rollbar.log('Hello world!');
 
 const setUpViews = (app) => {
+  const helpers = getHelpers(app);
   app.register(pointOfView, {
     engine: {
       pug: Pug,
     },
     includeViewExtension: true,
     defaultContext: {
+      ...helpers,
       assetPath: (filename) => `/assets/${filename}`,
     },
+    templates: path.join(__dirname, '..', 'server', 'views'),
   });
   app.decorateReply('render', function render(viewPath, locals) {
     this.view(viewPath, { ...locals, reply: this });

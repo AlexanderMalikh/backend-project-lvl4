@@ -1,1 +1,29 @@
 extends ../layouts/main.pug
+
+block content
+	a.nav-link(href="/tasks/new") Создать задачу
+	tr
+	table.table.table-stripped
+		thead.thead-light
+			tr
+				th ID
+				th Наименование
+				th Статус
+				th Автор
+				th Исполнитель
+				th Дата создания
+				th Action
+		tbody
+			each task in tasks
+				tr
+					td #{task.id}
+					td #{task.taskName}
+					td #{task.statusName}
+					td #{task.aFname} #{task.aLname}
+					td #{task.eFname} #{task.eLname}
+					td #{task.createdAt}					
+					td
+						a.nav-link(href=`/tags/${task.id}/edit`) Изменить
+						form(action=`/tags/${task.id}` method='post')
+							input(type="hidden" name="_method" value="DELETE")
+							button.btn.btn-link(type="submit") Удалить

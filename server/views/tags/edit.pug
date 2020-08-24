@@ -1,0 +1,6 @@
+extends ../layouts/main.pug
+
+block content
+  +formFor(action=`/tags/${tag.id}` method="post")
+    +input(label, 'name', errors)(type="text" value=`${tag.name}`)
+    +buttonTo('PATCH')(value="Изменить")

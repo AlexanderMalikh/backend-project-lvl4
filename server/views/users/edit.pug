@@ -1,0 +1,9 @@
+extends ../layouts/main.pug
+
+block content
+  +formFor(action=`/users/${user.id}` method="post")
+    +input(user, 'firstName', errors)(type="text" value=`${user.firstName}`)
+    +input(user, 'lastName', errors)(type="text" value=`${user.lastName}`)
+    +input(user, 'email', errors)(type="text" value=`${user.email}`)
+    +input(user, 'password', errors)(type="password")
+    +buttonTo('PATCH')(value="Изменить")

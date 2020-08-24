@@ -1,7 +1,7 @@
-import { encrypt } from '../lib/secure.js';
+import encrypt from '../lib/secure.js';
 
 export default async (app) => {
-  app.get('/session/new', async (request, reply) => reply.render('server/views/users/register'));
+  app.get('/session/new', async (request, reply) => reply.render('/users/register'));
 
   app.post('/session', async (request, reply) => {
     const { email, password } = request.body;

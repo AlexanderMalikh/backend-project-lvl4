@@ -1,0 +1,8 @@
+extends ../layouts/main.pug
+
+block content
+  formFor
+    +input(task, name, errors)
+    +input(task, descsription, errors)
+    +select(statuses, name, errors)
+    +select(users, )

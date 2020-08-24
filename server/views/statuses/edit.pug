@@ -1,0 +1,6 @@
+extends ../layouts/main.pug
+
+block content
+  +formFor(action=`/statuses/${status.id}` method="post")
+    +input(status, 'name', errors)(type="text" value=`${status.name}`)
+    +buttonTo('PATCH')(value="Изменить")

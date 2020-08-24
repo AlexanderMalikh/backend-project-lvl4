@@ -1,0 +1,30 @@
+- const getInputName = (entity, property) => `${entity.constructor.name.toLowerCase()}[${property}]`;
+
+mixin formFor
+  form&attributes(attributes)
+    block
+
+mixin input(entity, propertyName, errors = [])
+  - error = _.get(errors, propertyName)
+  .form-group.row
+    label.col-sm-2.col-form-label(for=propertyName)= propertyName
+    .col-sm-7
+      input(class="form-control" id=propertyName name= propertyName)&attributes(attributes)
+    if error
+      .col-sm-3
+        .small(class="text-danger" id=propertyName)=error.map(({ message }) => message).join(". ")
+
+mixin submit
+  .form-group
+    input(class="btn btn-primary" type="submit")&attributes(attributes)
+
+mixin buttonTo(method)
+  input(name="_method" type="hidden" value=method)
+  input(type="submit")&attributes(attributes)
+
+mixin select(entity, propertyName, errors = [])
+  .form-group
+    label.col-sm-2.col-form-label= propertyName
+    select.form-control(name= propertyName)
+      each prop in entity
+        option(value= `${prop.propertyName}`)
