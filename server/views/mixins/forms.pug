@@ -7,7 +7,7 @@ mixin formFor
 mixin input(entity, propertyName, errors = [])
   - error = _.get(errors, propertyName)
   .form-group.row
-    label.col-sm-2.col-form-label(for=propertyName)= propertyName
+    label.col-sm-2.col-form-label(for= propertyName)= propertyName
     .col-sm-7
       input(class="form-control" id=propertyName name= propertyName)&attributes(attributes)
     if error
@@ -22,9 +22,14 @@ mixin buttonTo(method)
   input(name="_method" type="hidden" value=method)
   input(type="submit")&attributes(attributes)
 
-mixin select(entity, propertyName, errors = [])
-  .form-group
-    label.col-sm-2.col-form-label= propertyName
-    select.form-control(name= propertyName)
-      each prop in entity
-        option(value= `${prop.propertyName}`)
+mixin select(entity, propertyName, idM, errors = [])
+  - error = _.get(errors, propertyName)
+  .form-group.row
+    label.col-sm-2.col-form-label(for= idM)= t(`views.tasks.${propertyName}`)
+    .col-sm-7
+      select.form-control(id = idM)&attributes(attributes)
+        each prop in entity
+          option(value= `${prop.id}`) #{prop.name}
+    if error
+      .col-sm-3
+        .small(class="text-danger" id = idM)=error.map(({ message }) => message).join(". ")

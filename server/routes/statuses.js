@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export default async (app) => {
   app.get('/statuses', async (request, reply) => {
     const statuses = await app.objection.models.status.query();
@@ -31,7 +33,7 @@ export default async (app) => {
       const status = await app.objection.models.status.fromJson(request.body);
       await app.objection.models.status.query().insert(status);
     } catch ({ data }) {
-      request.flash('danger', 'Не удалось создать статус');
+      request.flash('danger', i18next.t('flash.statuses.create.error'));
       reply.render('/statuses/new', { errors: data });
       return reply;
     }

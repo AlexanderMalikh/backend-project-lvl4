@@ -23,7 +23,7 @@ block content
 					td #{task.eFname} #{task.eLname}
 					td #{task.createdAt}					
 					td
-						a.nav-link(href=`/tags/${task.id}/edit`) Изменить
-						form(action=`/tags/${task.id}` method='post')
+						a.nav-link(href=`/tasks/${task.id}/edit`) Изменить
+						form(action=`/tasks/${task.id}` method='post')
 							input(type="hidden" name="_method" value="DELETE")
 							button.btn.btn-link(type="submit") Удалить

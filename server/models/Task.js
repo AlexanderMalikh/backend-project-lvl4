@@ -11,11 +11,11 @@ export default class Task extends unique(Model) {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name'],
+      required: ['name', 'statusId', 'authorId'],
       properties: {
         id: { type: 'integer' },
         name: { type: 'string', maxLength: 255, minLength: 1 },
-        status_id: { type: 'integer' },
+        status_id: { type: 'integer', minLength: 1 },
         author_id: { type: 'integer' },
         executor_id: { type: 'integer' },
         created_at: { type: 'timestamp' },

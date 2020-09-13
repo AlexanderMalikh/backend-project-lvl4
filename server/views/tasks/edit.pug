@@ -1,0 +1,10 @@
+extends ../layouts/main.pug
+
+block content
+  +formFor(action=`/tasks/${currentTask.id}` method="post")
+    +input(task, 'name', errors)(value = `${currentTask.name}`)
+    +input(task, 'description', errors)(value = `${currentTask.description}`)
+    +select(task.statuses, 'name', 'status',errors)(name= 'statusId' required value = `${currentTask.statusId}`)
+    +select(task.users, 'fullName', 'users',errors)(name= 'executorId' value = `${currentTask.executorId}`)
+    +select(task.tags, 'name', 'tags', errors)(name= 'tagId' multiple='multiple' required value = `${currentTask.tagId}`)
+    +buttonTo('PATCH')(value='Изменить')

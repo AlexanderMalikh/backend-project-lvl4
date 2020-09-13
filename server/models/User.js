@@ -9,6 +9,10 @@ export default class User extends unique(Model) {
     return 'users';
   }
 
+  get name() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
   static get jsonSchema() {
     return {
       type: 'object',

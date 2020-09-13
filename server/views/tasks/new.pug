@@ -1,8 +1,10 @@
 extends ../layouts/main.pug
 
 block content
-  formFor
-    +input(task, name, errors)
-    +input(task, descsription, errors)
-    +select(statuses, name, errors)
-    +select(users, )
+  +formFor(action=`/tasks/new` method="post")
+    +input(task, 'name', errors)(required)(value=`${filled.name}`)
+    +input(task, 'description', errors)(value=`${filled.description}`)
+    +select(task.statuses, 'statusId', 'status', errors)(name= 'statusId' value=`${filled.statusId}`)
+    +select(task.users, 'executorId', 'users', errors)(name= 'executorId' value=`${filled.executorId}`)
+    +select(task.tags, 'tagId', 'tags', errors)(name= 'tagId' multiple='multiple' required value=`${filled.tagId}`)
+    +submit()

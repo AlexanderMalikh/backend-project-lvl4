@@ -11,7 +11,9 @@ import fastifyErrorPage from 'fastify-error-page';
 import fastifySecureSession from 'fastify-secure-session';
 import fastifyMethodOverride from 'fastify-method-override';
 import pointOfView from 'point-of-view';
+import i18next from 'i18next';
 import models from './models';
+import ru from './locales/ru.js';
 
 import knexConfig from '../knexfile.js';
 import routes from './routes/index.js';
@@ -46,6 +48,18 @@ const setUpViews = (app) => {
   app.decorateReply('render', function render(viewPath, locals) {
     this.view(viewPath, { ...locals, reply: this });
   });
+};
+
+const setupLocalization = () => {
+  i18next
+    .init({
+      lng: 'ru',
+      fallbackLng: 'en',
+      debug: false,
+      resources: {
+        ru,
+      },
+    });
 };
 
 const setUpAssets = (app) => {
@@ -98,6 +112,7 @@ const registerPlugins = (app) => {
 };
 
 registerPlugins(app);
+setupLocalization();
 
 app.listen(process.env.PORT || 3000, '0.0.0.0', (err, address) => {
   if (err) {
